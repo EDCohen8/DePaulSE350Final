@@ -8,6 +8,8 @@
 /Grid.class
 /IslandPiece.class
 /MonsterPiece.class
+/MonsterSpriteInterface.class
+/NormalMonsterSprite.class
 /NormalPirateShipMovement.class
 /OceanPiece.class
 /PirateMovementInterface.class
@@ -18,6 +20,7 @@
 /PowerUpInterface.class
 /ShipMovementInterface.class
 /StarPiece.class
+/SuperMonsterSprite.class
 /TreasurePiece.class
 /YouLose.png
 /YouWin.png
@@ -25,7 +28,4 @@
 /ship.png
 /star.png
 /treasure.png
-/SuperMonsterPiece.class
-/SuperMonsterSprite.class
-/NormalMonsterSprite.class
-/MonsterSpriteInterface.class
+/UMLDIAGRAM.ucls
