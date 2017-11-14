@@ -4,7 +4,7 @@ import java.util.Observer;
 import java.util.Random;
 
 public class PirateShip implements GamePiece, Observer {
-	int x, y;
+	int x, y, randSearch;
 	Random rand = new Random();
 	Grid grid;
 	GamePiece[][] map;
@@ -15,12 +15,22 @@ public class PirateShip implements GamePiece, Observer {
 		map = grid.getMap();
 		x = rand.nextInt(map.length);
 		y = rand.nextInt(map[0].length);
+		randSearch = rand.nextInt(3);
 		while(!(map[y][x] instanceof OceanPiece)){
 			x = rand.nextInt(map.length);
 			y = rand.nextInt(map[0].length);
 		}
 		grid.addPirateShip(x, y, this);
-		movementStrat = new PirateMovementLookForTreasure();
+		if (randSearch == 0) {
+			movementStrat = new PirateMovementLookForTreasure();
+		}
+		/*else if (randSearch == 1)
+		{
+			movementStrat = new FastPirateShipMovement();
+		}*/
+		else {
+			movementStrat = new NormalPirateShipMovement();
+		}
 		gameOverBoolean = false;
 	}
 
@@ -41,7 +51,7 @@ public class PirateShip implements GamePiece, Observer {
 		// TODO Auto-generated method stub
 		return this;
 	}
-	
+
 	//Changes movement strategy of the specific pirate
 	public void changeFollowStrategy(PirateMovementInterface strat){
 		movementStrat = strat;
@@ -60,11 +70,11 @@ public class PirateShip implements GamePiece, Observer {
 		x = movementStrat.getX();
 		y = movementStrat.getY();
 	}
-	
+
 	public void changeGameOverBoolean(){
 		gameOverBoolean = true;
 	}
-	
+
 	public boolean gameOver(){
 		return gameOverBoolean;
 	}

@@ -31,7 +31,6 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[y][++x] = ship;
 			}
 			else if(gameMap[y][x+1] instanceof StarPiece) {
-				System.out.println("YES");
 				gameMap[y][x] = new OceanPiece(x ,y);
 				ship.incrementX(1);
 				StarPiece a = (StarPiece)gameMap[y][x + 1];
@@ -39,6 +38,17 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[y][++x] = ship;
 			}
 			else if(gameMap[y][x+1] instanceof TreasurePiece) {
+				ship.changeYouWinBoolean();
+				ship.incrementX(1);
+				gameMap[y][++x] = ship;
+			}
+			else if(gameMap[y][x+1] instanceof NormalMonsterSprite) {
+				ship.changeGameOverBoolean();
+				ship.incrementX(1);
+				gameMap[y][++x] = ship;
+			}
+			else if(gameMap[y][x+1] instanceof PirateShip) {
+				ship.changeGameOverBoolean();
 				ship.incrementX(1);
 				gameMap[y][++x] = ship;
 			}
@@ -55,7 +65,6 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[y][--x] = ship;
 			}
 			else if(gameMap[y][x-1] instanceof StarPiece) {
-				System.out.println("YES");
 				gameMap[y][x] = new OceanPiece(x, y);
 				ship.incrementX(-1);
 				StarPiece a = (StarPiece)gameMap[y][x - 1];
@@ -63,6 +72,17 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[y][--x] = ship;
 			}
 			else if(gameMap[y][x-1] instanceof TreasurePiece) {
+				ship.changeYouWinBoolean();
+				ship.incrementX(-1);
+				gameMap[y][--x] = ship;
+			}
+			else if(gameMap[y][x-1] instanceof NormalMonsterSprite) {
+				ship.changeGameOverBoolean();
+				ship.incrementX(-1);
+				gameMap[y][--x] = ship;
+			}
+			else if(gameMap[y][x-1] instanceof PirateShip) {
+				ship.changeGameOverBoolean();
 				ship.incrementX(-1);
 				gameMap[y][--x] = ship;
 			}
@@ -86,7 +106,18 @@ public class BasicShipMovement implements ShipMovementInterface {
 				a.power();
 				gameMap[--y][x] = ship;
 			}
-			if(gameMap[y-1][x] instanceof TreasurePiece) {
+			else if(gameMap[y-1][x] instanceof TreasurePiece) {
+				ship.changeYouWinBoolean();
+				ship.incrementY(-1);
+				gameMap[--y][x] = ship;
+			}
+			else if(gameMap[y-1][x] instanceof NormalMonsterSprite) {
+				ship.changeGameOverBoolean();
+				ship.incrementY(-1);
+				gameMap[--y][x] = ship;
+			}
+			else if(gameMap[y-1][x] instanceof PirateShip) {
+				ship.changeGameOverBoolean();
 				ship.incrementY(-1);
 				gameMap[--y][x] = ship;
 			}
@@ -96,7 +127,6 @@ public class BasicShipMovement implements ShipMovementInterface {
 	@Override
 	public void goSouth() {
 		// TODO Auto-generated method stub
-		System.out.println(y + " " + (gameMap[0].length - 1));
 		if (y < gameMap[0].length - 1) {
 			if(gameMap[y+1][x] instanceof OceanPiece){
 				gameMap[y][x] = new OceanPiece(x , y);
@@ -104,7 +134,6 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[++y][x] = ship;
 			}
 			else if(gameMap[y+1][x] instanceof StarPiece) {
-				System.out.println("YES");
 				gameMap[y][x] = new OceanPiece(x, y);
 				ship.incrementX(-1);
 				StarPiece a = (StarPiece)gameMap[y+1][x];
@@ -112,10 +141,20 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[++y][x] = ship;
 			}
 			else if(gameMap[y+1][x] instanceof TreasurePiece){
+				ship.changeYouWinBoolean();
 				ship.incrementY(1);
 				gameMap[++y][x] = ship;
 			}
-
+			else if(gameMap[y+1][x] instanceof NormalMonsterSprite){
+				ship.changeGameOverBoolean();
+				ship.incrementY(1);
+				gameMap[++y][x] = ship;
+			}
+			else if(gameMap[y+1][x] instanceof PirateShip){
+				ship.changeGameOverBoolean();
+				ship.incrementY(1);
+				gameMap[++y][x] = ship;
+			}
 
 		}
 

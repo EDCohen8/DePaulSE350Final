@@ -10,6 +10,7 @@ public class PlayerShip extends Observable implements GamePiece, PowerUpInterfac
 	GamePiece[][] map;
 	ShipMovementInterface shipMovementStrat;
 	Random rand = new Random();
+	boolean gameOverBoolean, youWinBoolean;
 	ArrayList<PowerUpDecorator> decoratorList = new ArrayList<PowerUpDecorator>();
 	public PlayerShip(){
 		grid = grid.getInstance();
@@ -18,6 +19,8 @@ public class PlayerShip extends Observable implements GamePiece, PowerUpInterfac
 		y = rand.nextInt(map[0].length);
 		grid.addShip(x, y, this);
 		shipMovementStrat = new BasicShipMovement(this);
+		gameOverBoolean = false;
+		youWinBoolean = false;
 	}
 	
 	@Override
@@ -75,5 +78,19 @@ public class PlayerShip extends Observable implements GamePiece, PowerUpInterfac
 		// TODO Auto-generated method stub
 		
 	}
+	public void changeGameOverBoolean(){
+		gameOverBoolean = true;
+	}
+	
+	public boolean gameOver(){
+		return gameOverBoolean;
+	}
 
+	public void changeYouWinBoolean() {
+		youWinBoolean = true;
+	}
+	
+	public boolean youWin() {
+		return youWinBoolean;
+	}
 }

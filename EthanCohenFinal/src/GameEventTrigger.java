@@ -17,6 +17,14 @@ public class GameEventTrigger implements GameEvent {
 		sceneGraph.clear();
 		sceneGraph.add(youLoseImageView);
 	}
+	
+	public ImageView youLoseImageView() {
+		youLoseImage = new Image("YouLose.png", 700, 700, false, false);
+		youLoseImageView = new ImageView(youLoseImage);
+		youLoseImageView.setX(0);
+		youLoseImageView.setY(0);
+		return youLoseImageView;
+	}
 
 	@Override
 	public void youWin(ObservableList<Node> sceneGraph) {

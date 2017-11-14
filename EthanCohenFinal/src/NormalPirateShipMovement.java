@@ -22,11 +22,21 @@ public class NormalPirateShipMovement implements PirateMovementInterface{
 						gameMap[y][x] = new OceanPiece(x , y);
 						gameMap[y][--x] = pir;
 					}
+					else if(gameMap[y][x-1] instanceof PlayerShip) {
+						pir.changeGameOverBoolean();
+						gameMap[y][x] = new OceanPiece(x , y);
+						gameMap[y][--x] = pir;
+					}
 				}
 			}
 			else if((int)ship.getLocation().getX() > x) {
 				if (x < gameMap.length) {
 					if(gameMap[y][x+1] instanceof OceanPiece) {
+						gameMap[y][x] = new OceanPiece(x , y);
+						gameMap[y][++x] = pir;
+					}
+					else if(gameMap[y][x+1] instanceof PlayerShip) {
+						pir.changeGameOverBoolean();
 						gameMap[y][x] = new OceanPiece(x , y);
 						gameMap[y][++x] = pir;
 					}
@@ -38,11 +48,21 @@ public class NormalPirateShipMovement implements PirateMovementInterface{
 						gameMap[y][x] = new OceanPiece(x, y);
 						gameMap[--y][x] = pir;
 					}
+					else if(gameMap[y-1][x] instanceof PlayerShip) {
+						pir.changeGameOverBoolean();
+						gameMap[y][x] = new OceanPiece(x, y);
+						gameMap[--y][x] = pir;
+					}
 				}
 			}
 			else if((int)ship.getLocation().getY() > y) {
 				if(y < gameMap[0].length) {
 					if(gameMap[y+1][x] instanceof OceanPiece) {
+						gameMap[y][x] = new OceanPiece(x,y);
+						gameMap[++y][x] = pir;
+					}
+					else if(gameMap[y+1][x] instanceof PlayerShip) {
+						pir.changeGameOverBoolean();
 						gameMap[y][x] = new OceanPiece(x,y);
 						gameMap[++y][x] = pir;
 					}

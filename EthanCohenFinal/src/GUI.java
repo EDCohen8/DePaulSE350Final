@@ -45,7 +45,6 @@ public class GUI extends Application {
 		map.populateMap();
 		placeShips();
 		placeTreasure();
-		map.displayMap();
 		mapArray = map.getMap();
 		drawMap();
 		loadShipImage();
@@ -58,13 +57,13 @@ public class GUI extends Application {
 			root.getChildren().add(pirIV);
 		}
 		root.getChildren().add(starImageView);
-		/*
-		monster = new Monster(14);
+		
+		monster = new MonsterPiece(14);
 		monster.addToPane(root.getChildren());
 		monstersThread = new Thread(monster);
 		monstersThread.start();
-		 */
-
+		 
+		map.displayMap();
 	}
 
 	public void drawMap() {
@@ -124,11 +123,16 @@ public class GUI extends Application {
 	public void updateImageLocation() {
 		shipImageView.setX(ship.getLocation().getX() * scale);
 		shipImageView.setY(ship.getLocation().getY() * scale);
+		if(ship.gameOver()) {
+			gameEvent.gameOver(root.getChildren());
+		}
+		if(ship.youWin()) {
+			gameEvent.youWin(root.getChildren());
+		}
 		int counter = 0;
 		for(ImageView pirIV: pirateImageViewList) {
 			pirIV.setX(pirateShipList.get(counter).getLocation().getX() * scale);
 			pirIV.setY(pirateShipList.get(counter).getLocation().getY() * scale);
-			System.out.println(pirateShipList.get(counter).gameOver() == true);
 			if(pirateShipList.get(counter).gameOver()){
 				gameEvent.gameOver(root.getChildren());
 			}
@@ -144,8 +148,8 @@ public class GUI extends Application {
 	}
 	public void placeShips() {
 		ship = new PlayerShip();
-		int x = rand.nextInt(13);
-		while (x < 6){
+		int x = rand.nextInt(7);
+		while (x < 3){
 			x = rand.nextInt(13);
 		}
 		for(int i = 0; i < x; i++){
@@ -196,6 +200,12 @@ public class GUI extends Application {
 				System.out.println(ship.getLocation().toString());
 			}
 		});
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void stop(){
+		monstersThread.stop();
 	}
 
 	public static void main(String[] args) {

@@ -23,6 +23,12 @@ public class FastPirateShipMovement implements PirateMovementInterface {
 						x = x-2;
 						gameMap[y][x] = pir;
 					}
+					else if(gameMap[y][x-2] instanceof PlayerShip) {
+						gameMap[y][x] = new OceanPiece(x , y);
+						x = x-2;
+						pir.changeGameOverBoolean();
+						gameMap[y][x] = pir;
+					}
 				}
 			}
 			else if((int)ship.getLocation().getX() > x) {
@@ -30,6 +36,12 @@ public class FastPirateShipMovement implements PirateMovementInterface {
 					if(gameMap[y][x+2] instanceof OceanPiece) {
 						gameMap[y][x] = new OceanPiece(x , y);
 						x = x + 2;
+						gameMap[y][x] = pir;
+					}
+					else if(gameMap[y][x+2] instanceof PlayerShip) {
+						gameMap[y][x] = new OceanPiece(x , y);
+						x = x + 2;
+						pir.changeGameOverBoolean();
 						gameMap[y][x] = pir;
 					}
 				}
@@ -41,6 +53,12 @@ public class FastPirateShipMovement implements PirateMovementInterface {
 						y = y - 2;
 						gameMap[y][x] = pir;
 					}
+					else if(gameMap[y-2][x] instanceof PlayerShip) {
+						gameMap[y][x] = new OceanPiece(x, y);
+						y = y - 2;
+						pir.changeGameOverBoolean();
+						gameMap[y][x] = pir;
+					}
 				}
 			}
 			else if((int)ship.getLocation().getY() > y) {
@@ -48,6 +66,12 @@ public class FastPirateShipMovement implements PirateMovementInterface {
 					if(gameMap[y+2][x] instanceof OceanPiece) {
 						gameMap[y][x] = new OceanPiece(x,y);
 						y = y + 2;
+						gameMap[y][x] = pir;
+					}
+					else if(gameMap[y+2][x] instanceof PlayerShip) {
+						gameMap[y][x] = new OceanPiece(x,y);
+						y = y + 2;
+						pir.changeGameOverBoolean();
 						gameMap[y][x] = pir;
 					}
 				}
