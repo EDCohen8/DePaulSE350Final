@@ -17,7 +17,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 		if(left){
 			if(x > 0){
 				x--;
-				while(x != 0 && (gameMap[y][x] instanceof IslandPiece || gameMap[y][x] instanceof PirateShip)) {
+				while(x != 0 && (gameMap[y][x] instanceof IslandPiece || gameMap[y][x] instanceof PirateShip) && y <= 48) {
 					x--;
 				}
 				if(gameMap[y][x] instanceof PlayerShip || gameMap[y][x] instanceof TreasurePiece){
@@ -74,7 +74,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 		}
 		if(!left && !moved){
 			if(++x < gameMap.length-1) {
-				while(x != gameMap.length-1 && (gameMap[y][x] instanceof IslandPiece || gameMap[y][x] instanceof PirateShip) && x < gameMap.length -1) {
+				while(x != gameMap.length-1 && (gameMap[y][x] instanceof IslandPiece || gameMap[y][x] instanceof PirateShip) && x < gameMap.length -1 && y < 49) {
 					x++;
 				}
 				if(gameMap[y][x] instanceof PlayerShip || gameMap[y][x] instanceof TreasurePiece){

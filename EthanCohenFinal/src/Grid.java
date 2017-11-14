@@ -56,14 +56,12 @@ public class Grid {
 
 	}
 	//adds the pirate ship to the map
-	public void addPirateShip(int x, int y) {
-
-
+	public void addPirateShip(int x, int y, PirateShip p) {
+		map[y][x] = p;
 	}
 	//adds the treasure to the map
 	public void addTreasure(int x, int y) {
-
-
+		
 	}
 	
 

@@ -19,6 +19,7 @@ public class PirateShip implements GamePiece, Observer {
 			x = rand.nextInt(map.length);
 			y = rand.nextInt(map[0].length);
 		}
+		grid.addPirateShip(x, y, this);
 		movementStrat = new PirateMovementLookForTreasure();
 	}
 

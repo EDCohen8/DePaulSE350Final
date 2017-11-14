@@ -3,7 +3,7 @@ import java.util.Random;
 
 import javafx.application.Platform;
 
-public class StarPiece implements GamePiece, PowerUpInterface {
+public class StarPiece extends PowerUpDecorator implements GamePiece, PowerUpInterface {
 	int x, y;
 	Random rand = new Random();
 	Grid grid;
@@ -21,6 +21,7 @@ public class StarPiece implements GamePiece, PowerUpInterface {
 			x = rand.nextInt(map.length);
 			y = rand.nextInt(map[0].length);
 		}
+		map[y][x] = this;
 		
 	}
 	@Override
@@ -38,25 +39,35 @@ public class StarPiece implements GamePiece, PowerUpInterface {
 	@Override
 	public GamePiece getObject() {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Point(x, y);
 	}
 
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return "*";
 	}
 
 	@Override
 	public void power() {
-		// TODO Auto-generated method stub
+		int treasureX = 0, treasureY = 0;
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map.length; j++){
+				if(map[j][i] instanceof TreasurePiece){
+					treasureX = i;
+					treasureY = j;
+					System.out.println("1");
+				}
+			}
+		}
 		
+		map[treasureY][treasureX].move(treasureX, treasureY);
 	}
 	
 

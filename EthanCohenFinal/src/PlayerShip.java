@@ -1,15 +1,16 @@
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
-public class PlayerShip extends Observable implements GamePiece {
+public class PlayerShip extends Observable implements GamePiece, PowerUpInterface {
 
 	int x, y;
 	Grid grid;
 	GamePiece[][] map;
 	ShipMovementInterface shipMovementStrat;
 	Random rand = new Random();
-	
+	ArrayList<PowerUpDecorator> decoratorList = new ArrayList<PowerUpDecorator>();
 	public PlayerShip(){
 		grid = grid.getInstance();
 		map = grid.getMap();
@@ -52,11 +53,27 @@ public class PlayerShip extends Observable implements GamePiece {
 	public void changeMovementStrat(ShipMovementInterface movementStrat) {
 		shipMovementStrat = movementStrat;
 	}
+	
+	public void addDecorator(PowerUpDecorator a){
+		decoratorList.add(a);
+	}
 
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
 		return new Point(x,y);
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return "SHIP";
+	}
+
+	@Override
+	public void power() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

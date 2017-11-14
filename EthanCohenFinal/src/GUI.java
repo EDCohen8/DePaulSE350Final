@@ -19,6 +19,7 @@ public class GUI extends Application {
 	Scene scene;
 	Pane root;
 	PlayerShip ship;
+	StarPiece star;
 	TreasurePiece treasure;
 	Grid map = Grid.getInstance();
 	GamePiece[][] mapArray;
@@ -26,10 +27,11 @@ public class GUI extends Application {
 	ArrayList<PirateShip> pirateShipList = new ArrayList<PirateShip>();
 	ArrayList<Image> pirateImageList = new ArrayList<Image>();
 	ArrayList<ImageView> pirateImageViewList = new ArrayList<ImageView>();
-	Image shipImage, pirateImage, treasureImage;
-	ImageView shipImageView, pirateImageView, treasureImageView;
+	Image shipImage, pirateImage, treasureImage, starImage;
+	ImageView shipImageView, pirateImageView, treasureImageView, starImageView;
 	Thread monstersThread;
 	MonsterPiece monster;
+	GameEvent gameEvent = new GameEventTrigger();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -47,6 +49,7 @@ public class GUI extends Application {
 		mapArray = map.getMap();
 		drawMap();
 		loadShipImage();
+		loadStarImage();
 		loadPirateImages();
 		loadTreasureImage();
 		root.getChildren().add(shipImageView);
@@ -54,12 +57,13 @@ public class GUI extends Application {
 		for(ImageView pirIV: pirateImageViewList) {
 			root.getChildren().add(pirIV);
 		}
+		root.getChildren().add(starImageView);
 		/*
 		monster = new Monster(14);
 		monster.addToPane(root.getChildren());
 		monstersThread = new Thread(monster);
 		monstersThread.start();
-		*/
+		 */
 
 	}
 
@@ -79,7 +83,7 @@ public class GUI extends Application {
 			}
 		}
 	}
-	
+
 	public void loadShipImage() {
 		shipImage = new Image("ship.png", scale, scale, false, false);
 		shipImageView = new ImageView(shipImage);
@@ -95,6 +99,12 @@ public class GUI extends Application {
 		treasureImageView.setY(treasure.getLocation().getY() * scale);
 	}
 
+	public void loadStarImage(){
+		starImage = new Image("star.png", scale, scale, false, false);
+		starImageView = new ImageView(starImage);
+		starImageView.setX(star.getLocation().getX() * scale);
+		starImageView.setY(star.getLocation().getY() * scale);
+	}
 
 	public void loadPirateImages() {
 		pirateImage = new Image("pirateShip.png", scale, scale, false, false);
@@ -108,6 +118,9 @@ public class GUI extends Application {
 
 
 
+
+
+
 	public void updateImageLocation() {
 		shipImageView.setX(ship.getLocation().getX() * scale);
 		shipImageView.setY(ship.getLocation().getY() * scale);
@@ -117,10 +130,14 @@ public class GUI extends Application {
 			pirIV.setY(pirateShipList.get(counter).getLocation().getY() * scale);
 			counter++;
 		}
+		if(ship.getLocation().getX()== treasure.getLocation().getX() && ship.getLocation().getY() == treasure.getLocation().getY()){
+			gameEvent.youWin(root.getChildren());
+		}
+		treasureImageView.setX(treasure.getLocation().getX() * scale);
+		treasureImageView.setY(treasure.getLocation().getY() * scale);
 		System.out.println();
 		//map.displayMap();
 	}
-
 	public void placeShips() {
 		ship = new PlayerShip();
 		int x = rand.nextInt(13);
@@ -130,11 +147,13 @@ public class GUI extends Application {
 		for(int i = 0; i < x; i++){
 			pirateShipList.add(new PirateShip());
 		}
+
 	}
-	
+
 	public void placeTreasure() {
 		treasure = new TreasurePiece();
-		
+		star = new StarPiece(ship);
+
 	}
 	public void startSailing() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent> () {
@@ -174,7 +193,7 @@ public class GUI extends Application {
 			}
 		});
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

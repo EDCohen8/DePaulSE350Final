@@ -29,3 +29,5 @@
 /NormalPirateShipMovement.class
 /PirateMovementLookForTreasure.class
 >>>>>>> origin/master
+/GameEvent.class
+/GameEventTrigger.class
