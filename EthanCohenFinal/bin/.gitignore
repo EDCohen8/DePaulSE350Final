@@ -1,6 +1,31 @@
+<<<<<<< HEAD
 /star.png
 /StarPiece.class
 /StarInterface.class
 /StarDecorator.class
 /PowerUpInterface.class
 /PowerUpDecorator.class
+=======
+/BasicShipMovement.class
+/GUI$1.class
+/GUI.class
+/GamePiece.class
+/Grid.class
+/IslandPiece.class
+/MonsterPiece.class
+/NormalMovement.class
+/OceanPiece.class
+/PirateMovementInterface.class
+/PirateShip.class
+/PlayerShip.class
+/ShipMovementInterface.class
+/TreasurePiece.class
+/YouLose.png
+/YouWin.png
+/pirateShip.png
+/ship.png
+/treasure.png
+/FastPirateShipMovement.class
+/NormalPirateShipMovement.class
+/PirateMovementLookForTreasure.class
+>>>>>>> origin/master
