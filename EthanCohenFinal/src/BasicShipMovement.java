@@ -111,7 +111,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 				a.power();
 				gameMap[++y][x] = ship;
 			}
-			if(gameMap[y+1][x] instanceof TreasurePiece){
+			else if(gameMap[y+1][x] instanceof TreasurePiece){
 				ship.incrementY(1);
 				gameMap[++y][x] = ship;
 			}

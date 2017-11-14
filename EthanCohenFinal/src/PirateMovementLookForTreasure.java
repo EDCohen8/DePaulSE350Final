@@ -6,7 +6,6 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 	Grid map = Grid.getInstance();
 	GamePiece[][] gameMap = map.getMap();
 	boolean left = true, down = true, moved;
-
 	@Override
 	public void updateStrat(Observable o, Object arg, PirateShip pir) {
 		// TODO Auto-generated method stub
@@ -22,6 +21,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 				}
 				if(gameMap[y][x] instanceof PlayerShip || gameMap[y][x] instanceof TreasurePiece){
 					System.out.println("Game Over");
+					pir.changeGameOverBoolean();
 					moved = true;
 				}
 				if(gameMap[y][x] instanceof OceanPiece){
@@ -39,6 +39,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 						}
 						if(gameMap[y][x] instanceof PlayerShip  || gameMap[y][x] instanceof TreasurePiece){
 							System.out.println("Game Over");
+							pir.changeGameOverBoolean();
 							moved = true;
 						}
 						else if(gameMap[y][x] instanceof OceanPiece){
@@ -58,6 +59,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 						}
 						if(gameMap[y][x] instanceof PlayerShip){
 							System.out.println("Game Over");
+							pir.changeGameOverBoolean();
 							moved = true;
 						}
 						if(gameMap[y][x] instanceof IslandPiece){
@@ -79,6 +81,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 				}
 				if(gameMap[y][x] instanceof PlayerShip || gameMap[y][x] instanceof TreasurePiece){
 					System.out.println("Game Over");
+					pir.changeGameOverBoolean();
 					moved = true;
 				}
 				if(gameMap[y][x] instanceof OceanPiece){
@@ -98,6 +101,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 					}
 					if(gameMap[y][x] instanceof PlayerShip  || gameMap[y][x] instanceof TreasurePiece){
 						System.out.println("Game Over");
+						pir.changeGameOverBoolean();
 						moved = true;
 					}
 					if(gameMap[y][x] instanceof OceanPiece){
@@ -117,6 +121,7 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 					}
 					if(gameMap[y][x] instanceof PlayerShip){
 						System.out.println("Game Over");
+						pir.changeGameOverBoolean();
 						moved = true;
 					}
 					if(gameMap[y][x] instanceof IslandPiece){
@@ -132,6 +137,8 @@ public class PirateMovementLookForTreasure implements PirateMovementInterface {
 		}
 	}
 
+	
+	
 	@Override
 	public int getY() {
 		// TODO Auto-generated method stub

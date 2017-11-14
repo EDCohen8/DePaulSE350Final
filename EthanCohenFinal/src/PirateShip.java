@@ -9,7 +9,7 @@ public class PirateShip implements GamePiece, Observer {
 	Grid grid;
 	GamePiece[][] map;
 	PirateMovementInterface movementStrat;
-	
+	boolean gameOverBoolean;
 	public PirateShip() {
 		grid = Grid.getInstance();
 		map = grid.getMap();
@@ -21,6 +21,7 @@ public class PirateShip implements GamePiece, Observer {
 		}
 		grid.addPirateShip(x, y, this);
 		movementStrat = new PirateMovementLookForTreasure();
+		gameOverBoolean = false;
 	}
 
 	@Override
@@ -58,6 +59,14 @@ public class PirateShip implements GamePiece, Observer {
 		movementStrat.updateStrat(arg0, arg1, this);
 		x = movementStrat.getX();
 		y = movementStrat.getY();
+	}
+	
+	public void changeGameOverBoolean(){
+		gameOverBoolean = true;
+	}
+	
+	public boolean gameOver(){
+		return gameOverBoolean;
 	}
 
 }

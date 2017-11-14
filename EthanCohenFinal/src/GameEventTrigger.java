@@ -12,8 +12,9 @@ public class GameEventTrigger implements GameEvent {
 		// TODO Auto-generated method stub
 		youLoseImage = new Image("YouLose.png", 700, 700, false, false);
 		youLoseImageView = new ImageView(youLoseImage);
-		youLoseImageView.setX(350);
-		youLoseImageView.setY(350);
+		youLoseImageView.setX(0);
+		youLoseImageView.setY(0);
+		sceneGraph.clear();
 		sceneGraph.add(youLoseImageView);
 	}
 
@@ -24,7 +25,9 @@ public class GameEventTrigger implements GameEvent {
 		youWinImageView = new ImageView(youWinImage);
 		youWinImageView.setX(0);
 		youWinImageView.setY(0);
+		sceneGraph.clear();
 		sceneGraph.add(youWinImageView);
+		
 	}
 
 }

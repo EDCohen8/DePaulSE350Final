@@ -128,6 +128,10 @@ public class GUI extends Application {
 		for(ImageView pirIV: pirateImageViewList) {
 			pirIV.setX(pirateShipList.get(counter).getLocation().getX() * scale);
 			pirIV.setY(pirateShipList.get(counter).getLocation().getY() * scale);
+			System.out.println(pirateShipList.get(counter).gameOver() == true);
+			if(pirateShipList.get(counter).gameOver()){
+				gameEvent.gameOver(root.getChildren());
+			}
 			counter++;
 		}
 		if(ship.getLocation().getX()== treasure.getLocation().getX() && ship.getLocation().getY() == treasure.getLocation().getY()){
