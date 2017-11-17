@@ -15,4 +15,5 @@ public interface MonsterSpriteInterface {
 	public int getIndexNum();
 	public int getClassNum();
 	public void changeClassNum();
+	public void destroy();
 }

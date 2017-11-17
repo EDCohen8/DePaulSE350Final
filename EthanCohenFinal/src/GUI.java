@@ -72,6 +72,7 @@ public class GUI extends Application {
 			for(int y = 0; y < mapArray[0].length; y++){
 				Rectangle rect = new Rectangle(x*scale, y*scale, scale, scale);
 				rect.setStroke(Color.BLACK);
+				rect.setStrokeWidth(1.5);
 				if(mapArray[y][x] instanceof IslandPiece) {
 					rect.setFill(Color.GREEN);
 				}
@@ -114,11 +115,6 @@ public class GUI extends Application {
 			pirateImageViewList.add(pirateImageView);
 		}
 	}
-
-
-
-
-
 
 	public void updateImageLocation() {
 		shipImageView.setX(ship.getLocation().getX() * scale);

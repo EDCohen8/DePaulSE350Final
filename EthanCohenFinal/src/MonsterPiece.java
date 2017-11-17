@@ -19,11 +19,11 @@ public class MonsterPiece implements Runnable {
 	int xMove, yMove;
 	Random random;
 	ObservableList<Node> gameEventScene;
-	
+
 	public MonsterPiece(int scalingFactorScale) {
 		random = new Random();
 		scalingFactor = scalingFactorScale;
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 15; i++) {
 			monsterSprites.add(new NormalMonsterSprite(scalingFactor));
 		}
 		this.radius = 10;
@@ -52,29 +52,33 @@ public class MonsterPiece implements Runnable {
 			} catch(InterruptedException e) {
 				e.printStackTrace();
 			}
+			ArrayList<MonsterSpriteInterface> tempArrayList = new ArrayList<MonsterSpriteInterface>();
+			ArrayList<MonsterSpriteInterface> removeFromList = new ArrayList<MonsterSpriteInterface>();
 			for(MonsterSpriteInterface monsterSprite: monsterSprites) {
 				if(monsterSprite instanceof NormalMonsterSprite) {
 					map[monsterSprite.getY()][monsterSprite.getX()] = new OceanPiece(monsterSprite.getX(), monsterSprite.getY());
 					xMove = monsterSprite.getX() + random.nextInt(3) - 1;
 					yMove = monsterSprite.getY() + random.nextInt(3) - 1;
-					System.out.println(((NormalMonsterSprite) monsterSprite).getLocation().toString() + " " + new Point(xMove, yMove).toString());
 					if(xMove >= 0 && yMove >= 0 && xMove <= map.length-1 && yMove <= map[0].length-1)
 						if(map[yMove][xMove] instanceof OceanPiece) {
-							System.out.println("OCEAN");
 							map[monsterSprite.getY()][monsterSprite.getX()] = new OceanPiece(monsterSprite.getX(), monsterSprite.getY());
 							map[yMove][xMove] = (NormalMonsterSprite) monsterSprite;
 							monsterSprite.setX(xMove);
 							monsterSprite.setY(yMove);
+							tempArrayList.add(monsterSprite);
 						}
 						else if(map[yMove][xMove] instanceof NormalMonsterSprite) {
-							/*System.out.println("Making a SuperMonster");
-							MonsterSpriteInterface removeSprite = (MonsterSpriteInterface) map[yMove][xMove];
+							System.out.println("Making a SuperMonster");
+							for(MonsterSpriteInterface monsterSpriteTemp: monsterSprites){
+								if(monsterSpriteTemp.getY() == yMove && monsterSpriteTemp.getX() == xMove){
+									removeFromList.add(monsterSpriteTemp);
+								}
+							}
+							removeFromList.add(monsterSprite);
 							MonsterSpriteInterface newSprite = (MonsterSpriteInterface) new SuperMonsterSprite(xMove, yMove);
-							monsterSprite = newSprite;
-							((NormalMonsterSprite) removeSprite).destroy();
+							tempArrayList.add(newSprite);
 							map[monsterSprite.getY()][monsterSprite.getX()] = new OceanPiece(monsterSprite.getX(), monsterSprite.getY());
 							map[yMove][xMove] = (GamePiece) newSprite;
-*/
 						}
 						else if(map[yMove][xMove] instanceof PlayerShip) {
 							PlayerShip playerShip =  (PlayerShip) map[yMove][xMove];
@@ -84,14 +88,23 @@ public class MonsterPiece implements Runnable {
 							monsterSprite.setY(yMove);
 							System.out.println("YOU DIED TO A MONSTER");
 						}
-						else {
-							System.out.println(":(");
+						else{
+							map[monsterSprite.getY()][monsterSprite.getX()] = (GamePiece) monsterSprite;
+							tempArrayList.add(monsterSprite);
 						}
 				}
 				else if (monsterSprite instanceof SuperMonsterSprite) {
 					System.out.println("SUPER MONSTER BABY");
 				}
 			}
+			for(MonsterSpriteInterface removeS: removeFromList){
+				removeS.destroy();
+				if(tempArrayList.contains(removeS)){
+					tempArrayList.remove(removeS);
+				}
+			}
+			monsterSprites = tempArrayList;
 		}
+
 	}
 }
