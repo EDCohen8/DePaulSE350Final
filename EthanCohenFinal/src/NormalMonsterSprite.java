@@ -19,10 +19,17 @@ public class NormalMonsterSprite implements MonsterSpriteInterface, GamePiece {
 		grid = Grid.getInstance();
 		map = grid.getMap();
 		circle = new Circle();
+		circle.setFill(Color.BLACK);
 		scalingFactor = scalingFactorScale;
 		x = rand.nextInt(map.length - 1);
 		y = rand.nextInt(map[0].length - 1);
 		while(!(map[y][x] instanceof OceanPiece)) {
+			if(map[y][x] instanceof NormalMonsterSprite){
+				NormalMonsterSprite nmSprite = (NormalMonsterSprite)map[y][x];
+				nmSprite.destroy();
+				map[y][x] = new SuperMonsterSprite(x,y, circle);
+				System.out.println("YAY");
+			}
 			x = rand.nextInt(map.length - 1);
 			y = rand.nextInt(map[0].length - 1);
 		}

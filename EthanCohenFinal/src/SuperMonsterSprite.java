@@ -18,10 +18,10 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 	int radius = 10;
 	int size, classnum;
 	
-	public SuperMonsterSprite(int x, int y) {
+	public SuperMonsterSprite(int x, int y, Circle circleNew) {
 		grid = Grid.getInstance();
 		map = grid.getMap();
-		circle = new Circle();
+		circle = circleNew;
 		circle.setFill(Color.RED);
 		circle.setStroke(Color.RED);
 		this.x = x;
@@ -30,12 +30,12 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 		setPositionX(this.x);
 		setPositionY(this.y);
 		circle.setRadius(radius * size);
+		map[y][x] = this;
 	}
 
 	@Override
 	public void move(int xPos, int yPos) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -72,6 +72,7 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 	public void setX(int xPos) {
 		// TODO Auto-generated method stub
 		x = xPos;
+		setPositionX(x);
 		
 	}
 
@@ -79,6 +80,7 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 	public void setY(int yPos) {
 		// TODO Auto-generated method stub
 		y = yPos;
+		setPositionY(y);
 	}
 
 	@Override
@@ -140,11 +142,6 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 	public void changeClassNum() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public void addToPane(ObservableList<Node> sceneGraph) {
-		System.out.println("Adding circle to pane: " + circle.getCenterX() + " " + circle.getCenterY() + " " + radius);
-		sceneGraph.add(circle);
 	}
 	
 	@Override
