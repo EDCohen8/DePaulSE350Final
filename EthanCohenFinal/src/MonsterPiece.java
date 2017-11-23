@@ -87,24 +87,21 @@ public class MonsterPiece implements Runnable {
 							monsterSprite.setX(xMove);
 							monsterSprite.setY(yMove);
 							System.out.println("YOU DIED TO A MONSTER");
-						}
-						else{
-							map[monsterSprite.getY()][monsterSprite.getX()] = (GamePiece) monsterSprite;
+						}              
+						else if (monsterSprite instanceof SuperMonsterSprite) {
 							tempArrayList.add(monsterSprite);
+							System.out.println("SUPER MONSTER BABY");
 						}
 				}
-				else if (monsterSprite instanceof SuperMonsterSprite) {
-					System.out.println("SUPER MONSTER BABY");
+				for(MonsterSpriteInterface removeS: removeFromList){
+					removeS.destroy();
+					if(tempArrayList.contains(removeS)){
+						tempArrayList.remove(removeS);
+					}
 				}
+				monsterSprites = tempArrayList;
 			}
-			for(MonsterSpriteInterface removeS: removeFromList){
-				removeS.destroy();
-				if(tempArrayList.contains(removeS)){
-					tempArrayList.remove(removeS);
-				}
-			}
-			monsterSprites = tempArrayList;
-		}
 
+		}
 	}
 }

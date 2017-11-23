@@ -24,10 +24,10 @@ public class PirateShip implements GamePiece, Observer {
 		if (randSearch == 0) {
 			movementStrat = new PirateMovementLookForTreasure();
 		}
-		/*else if (randSearch == 1)
+		else if (randSearch == 1)
 		{
 			movementStrat = new FastPirateShipMovement();
-		}*/
+		}
 		else {
 			movementStrat = new NormalPirateShipMovement();
 		}
@@ -53,10 +53,15 @@ public class PirateShip implements GamePiece, Observer {
 	}
 
 	//Changes movement strategy of the specific pirate
-	public void changeFollowStrategy(PirateMovementInterface strat){
-		movementStrat = strat;
+	public void changeFollowStrategy(){
+		randSearch = rand.nextInt(6);
+		if (randSearch == 0) {
+			movementStrat = new PirateMovementLookForTreasure();
+		}
+		else {
+			movementStrat = new NormalPirateShipMovement();
+		}
 	}
-
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
@@ -74,7 +79,6 @@ public class PirateShip implements GamePiece, Observer {
 	public void changeGameOverBoolean(){
 		gameOverBoolean = true;
 	}
-
 	public boolean gameOver(){
 		return gameOverBoolean;
 	}

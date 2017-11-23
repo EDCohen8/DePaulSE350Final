@@ -1,6 +1,9 @@
 import java.awt.Point;
 import java.util.Random;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
@@ -19,6 +22,8 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 		grid = Grid.getInstance();
 		map = grid.getMap();
 		circle = new Circle();
+		circle.setFill(Color.RED);
+		circle.setStroke(Color.RED);
 		this.x = x;
 		this.y = y;
 		size = 2;
@@ -137,6 +142,11 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 		
 	}
 
+	public void addToPane(ObservableList<Node> sceneGraph) {
+		System.out.println("Adding circle to pane: " + circle.getCenterX() + " " + circle.getCenterY() + " " + radius);
+		sceneGraph.add(circle);
+	}
+	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
