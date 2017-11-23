@@ -2,12 +2,13 @@ package testing;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import game.*;
 
 class NaoufalOceanMapTest {
 	
 	@Test
 	void MapCreation() {
-		OceanMap Map = OceanMap.getMapInstance();
+		OceanMap Map = game.Grid.getInstance()OceanMap.getMapInstance();
 		assertTrue(Map != null);
 	}
 	

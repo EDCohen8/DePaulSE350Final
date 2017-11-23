@@ -101,13 +101,30 @@ public class MonsterPiece implements Runnable {
 				}
 				else if (monsterSprite instanceof SuperMonsterSprite) {
 					map[monsterSprite.getY()][monsterSprite.getX()] = new OceanPiece(monsterSprite.getX(), monsterSprite.getY());
+					for(int i = monsterSprite.getX()-1; i < monsterSprite.getX() + 2;  i++){
+						for(int j = monsterSprite.getY()-1; j < monsterSprite.getY()+2; j++){
+							if(map[j][i] instanceof SuperMonsterSprite) {
+								map[j][i] = new OceanPiece(i,j);
+							}
+						}
+					}
 					xMove = monsterSprite.getX() + random.nextInt(3) - 1;
 					yMove = monsterSprite.getY() + random.nextInt(3) - 1;
 					if(xMove >= 2 && yMove >= 2 && xMove <= map.length-3 && yMove <= map[0].length-3){
 						if(map[yMove][xMove] instanceof OceanPiece) {
 							for(int i = xMove-1; i < xMove + 2;  i++){
 								for(int j = yMove-1; j < yMove+2; j++){
-									
+									if(map[j][i] instanceof OceanPiece){
+										map[j][i] = (SuperMonsterSprite) monsterSprite;
+									}
+									else if(map[j][i] == monsterSprite){
+										map[j][i] = (SuperMonsterSprite) monsterSprite;
+									}
+									else if(map[j][i] instanceof PlayerShip){
+										PlayerShip s = (PlayerShip) map[j][i];
+										s.changeGameOverBoolean();
+										System.out.println("YOU DIED TO A SUPER MONSTER");
+									}
 								}
 							}
 							map[monsterSprite.getY()][monsterSprite.getX()] = new OceanPiece(monsterSprite.getX(), monsterSprite.getY());
@@ -125,20 +142,32 @@ public class MonsterPiece implements Runnable {
 					else{
 						tempArrayList.add(monsterSprite);
 						map[monsterSprite.getY()][monsterSprite.getX()] = (SuperMonsterSprite) monsterSprite;
+						for(int i = monsterSprite.getX()-1; i < monsterSprite.getX() + 2;  i++){
+							for(int j = monsterSprite.getY()-1; j < monsterSprite.getY()+2; j++){
+								if(map[j][i] instanceof OceanPiece) {
+									map[j][i] = (SuperMonsterSprite) monsterSprite;
+								}
+							}
+
+							
+
+						}
+
 					}
+
 				}
 
-				for(MonsterSpriteInterface removeS: removeFromList){
-					removeS.destroy();
-					if(tempArrayList.contains(removeS)){
-						tempArrayList.remove(removeS);
-					}
-				}
-				monsterSprites = tempArrayList;
-				grid.displayMap();
-				System.out.println("");
 			}
-
+			for(MonsterSpriteInterface removeS: removeFromList){
+				removeS.destroy();
+				if(tempArrayList.contains(removeS)){
+					tempArrayList.remove(removeS);
+				}
+			}
+			monsterSprites = tempArrayList;
+			grid.displayMap();
+			System.out.println("");
 		}
+
 	}
 }
