@@ -6,7 +6,8 @@ public class BasicShipMovement implements ShipMovementInterface {
 	Grid grid;
 	GamePiece[][] gameMap;
 	PlayerShip ship;
-
+	
+	//Constructor for ship movement which gets the location of the ship and the singleton map
 	public BasicShipMovement(PlayerShip ship) {
 		this.ship = ship;
 		grid = Grid.getInstance();
@@ -21,7 +22,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 			}
 		}
 	}
-
+	//makes the ship go to the right
 	@Override
 	public void goEast() {
 		// TODO Auto-generated method stub
@@ -54,6 +55,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[y][++x] = ship;
 			}
 			else if(gameMap[y][x+1] instanceof PirateStrategyChangerPiece){
+				gameMap[y][x] = new OceanPiece(x , y);
 				PirateStrategyChangerPiece b = (PirateStrategyChangerPiece) gameMap[y][x+1];
 				b.power();
 				ship.incrementX(1);
@@ -61,7 +63,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 			}
 		}
 	}
-
+	//makes the ship go to the left
 	@Override
 	public void goWest() {
 		// TODO Auto-generated method stub
@@ -94,6 +96,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[y][--x] = ship;
 			}
 			else if(gameMap[y][x-1] instanceof PirateStrategyChangerPiece){
+				gameMap[y][x] = new OceanPiece(x , y);
 				PirateStrategyChangerPiece b = (PirateStrategyChangerPiece) gameMap[y][x-1];
 				b.power();
 				ship.incrementX(-1);
@@ -101,7 +104,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 			}
 		}
 	}
-
+	//makes the ship go up
 	@Override
 	public void goNorth() {
 		// TODO Auto-generated method stub
@@ -135,6 +138,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[--y][x] = ship;
 			}
 			else if(gameMap[y-1][x] instanceof PirateStrategyChangerPiece){
+				gameMap[y][x] = new OceanPiece(x , y);
 				PirateStrategyChangerPiece b = (PirateStrategyChangerPiece) gameMap[y-1][x];
 				b.power();
 				ship.incrementY(-1);
@@ -142,7 +146,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 			}
 		}
 	}
-
+	//makes the ship go down
 	@Override
 	public void goSouth() {
 		// TODO Auto-generated method stub
@@ -174,6 +178,7 @@ public class BasicShipMovement implements ShipMovementInterface {
 				gameMap[++y][x] = ship;
 			}
 			else if(gameMap[y+1][x] instanceof PirateStrategyChangerPiece){
+				gameMap[y][x] = new OceanPiece(x , y);
 				PirateStrategyChangerPiece b = (PirateStrategyChangerPiece) gameMap[y+1][x];
 				b.power();
 				ship.incrementY(1);

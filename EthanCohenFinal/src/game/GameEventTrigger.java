@@ -8,6 +8,7 @@ public class GameEventTrigger implements GameEvent {
 
 	Image youWinImage, youLoseImage;
 	ImageView youWinImageView, youLoseImageView;
+	//makes the game over appear on top of the GUI
 	@Override
 	public void gameOver(ObservableList<Node> sceneGraph) {
 		// TODO Auto-generated method stub
@@ -26,7 +27,7 @@ public class GameEventTrigger implements GameEvent {
 		youLoseImageView.setY(0);
 		return youLoseImageView;
 	}
-
+	//makes the you win appear on top of the GUI
 	@Override
 	public void youWin(ObservableList<Node> sceneGraph) {
 		// TODO Auto-generated method stub

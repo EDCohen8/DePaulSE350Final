@@ -1,5 +1,5 @@
 package game;
-
+//DECORATOR
 public class PowerUpDecorator implements PowerUpInterface{
 
 	@Override

@@ -1,14 +1,14 @@
 package game;
 import java.util.Observable;
 import java.util.Random;
-
+//STRATEGY DESIGN
 public class NormalPirateShipMovement implements PirateMovementInterface{
 
 	Random rand = new Random();
 	int x, y;
 	Grid map = Grid.getInstance();
 	GamePiece[][] gameMap = map.getMap();
-
+	//moves the pirate ship like how it moved in Christopher Columbus. This uses observer to move whenever the ship moves
 	@Override
 	public void updateStrat(Observable o, Object arg, PirateShip pir) {
 		// TODO Auto-generated method stub

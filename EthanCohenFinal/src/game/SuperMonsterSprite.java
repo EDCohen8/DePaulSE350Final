@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
+//COMPOSITE CLASS
 public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 	
 	int x, y;
@@ -18,7 +18,7 @@ public class SuperMonsterSprite implements MonsterSpriteInterface, GamePiece{
 	int scalingFactor = 14;
 	int radius = 10;
 	int size, classnum;
-	
+	//larger monster
 	public SuperMonsterSprite(int x, int y, Circle circleNew) {
 		grid = Grid.getInstance();
 		map = grid.getMap();

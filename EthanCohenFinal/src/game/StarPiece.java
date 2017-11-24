@@ -3,7 +3,7 @@ import java.awt.Point;
 import java.util.Random;
 
 import javafx.application.Platform;
-
+//DECORATOR DESIGN
 public class StarPiece extends PowerUpDecorator implements GamePiece, PowerUpInterface {
 	int x, y;
 	Random rand = new Random();
@@ -54,7 +54,7 @@ public class StarPiece extends PowerUpDecorator implements GamePiece, PowerUpInt
 		// TODO Auto-generated method stub
 		return "*";
 	}
-
+	//makes the treasure move closer to the ship
 	@Override
 	public void power() {
 		int treasureX = 0, treasureY = 0;

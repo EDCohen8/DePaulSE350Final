@@ -69,154 +69,158 @@ public class GUI extends Application {
 		map.displayMap();
 	}
 
-
-		public void drawMap() {
-			scale = 14;
-			for(int x = 0; x < mapArray.length; x++) {
-				for(int y = 0; y < mapArray[0].length; y++){
-					Rectangle rect = new Rectangle(x*scale, y*scale, scale, scale);
-					rect.setStroke(Color.BLACK);
-					rect.setStrokeWidth(1.5);
-					if(mapArray[y][x] instanceof IslandPiece) {
-						rect.setFill(Color.GREEN);
-					}
-					else {
-						rect.setFill(Color.PALETURQUOISE);
-					}
-					root.getChildren().add(rect);
+	//draws the blue and green rectangles onto the map.
+	public void drawMap() {
+		scale = 14;
+		for(int x = 0; x < mapArray.length; x++) {
+			for(int y = 0; y < mapArray[0].length; y++){
+				Rectangle rect = new Rectangle(x*scale, y*scale, scale, scale);
+				rect.setStroke(Color.BLACK);
+				rect.setStrokeWidth(1.5);
+				if(mapArray[y][x] instanceof IslandPiece) {
+					rect.setFill(Color.GREEN);
 				}
+				else {
+					rect.setFill(Color.PALETURQUOISE);
+				}
+				root.getChildren().add(rect);
 			}
 		}
-			public void loadShipImage() {
-				shipImage = new Image("ship.png", scale, scale, false, false);
-				shipImageView = new ImageView(shipImage);
-				shipImageView.setX(ship.getLocation().getX() * scale);
-				shipImageView.setY(ship.getLocation().getY() * scale);
+	}
+	//loads the ship image
+	public void loadShipImage() {
+		shipImage = new Image("ship.png", scale, scale, false, false);
+		shipImageView = new ImageView(shipImage);
+		shipImageView.setX(ship.getLocation().getX() * scale);
+		shipImageView.setY(ship.getLocation().getY() * scale);
+	}
+
+	//loads the treasure image
+	public void loadTreasureImage() {
+		treasureImage = new Image("treasure.png", scale, scale, false, false);
+		treasureImageView = new ImageView(treasureImage);
+		treasureImageView.setX(treasure.getLocation().getX() * scale);
+		treasureImageView.setY(treasure.getLocation().getY() * scale);
+	}
+
+	//loads the star image
+	public void loadStarImage(){
+		starImage = new Image("star.png", scale, scale, false, false);
+		starImageView = new ImageView(starImage);
+		starImageView.setX(star.getLocation().getX() * scale);
+		starImageView.setY(star.getLocation().getY() * scale);
+	}
+	
+	//loads the pirate image
+	public void loadPirateImages() {
+		pirateImage = new Image("pirateShip.png", scale, scale, false, false);
+		for(PirateShip pir: pirateShipList) {
+			pirateImageView = new ImageView(pirateImage);
+			pirateImageView.setX(pir.getLocation().getX() * scale);
+			pirateImageView.setY(pir.getLocation().getY() * scale);
+			pirateImageViewList.add(pirateImageView);
+		}
+	}
+	//loads the recycle image to change search strats at runtime for the pirate
+	public void loadChangeSearchStratImage() {
+		changeSearchStratImage = new Image("recycle.png", scale, scale, false, false);
+		changeSearchStratImageView = new ImageView(changeSearchStratImage);
+		changeSearchStratImageView.setX(pscp.getLocation().getX() * scale);
+		changeSearchStratImageView.setY(pscp.getLocation().getY() * scale);
+	}
+
+	//changes image location displayed on the GUI after things move inside the singleton map
+	public void updateImageLocation() {
+		shipImageView.setX(ship.getLocation().getX() * scale);
+		shipImageView.setY(ship.getLocation().getY() * scale);
+		if(ship.gameOver()) {
+			gameEvent.gameOver(root.getChildren());
+		}
+		if(ship.youWin()) {
+			gameEvent.youWin(root.getChildren());
+		}
+		int counter = 0;
+		for(ImageView pirIV: pirateImageViewList) {
+			pirIV.setX(pirateShipList.get(counter).getLocation().getX() * scale);
+			pirIV.setY(pirateShipList.get(counter).getLocation().getY() * scale);
+			if(pirateShipList.get(counter).gameOver()){
+				gameEvent.gameOver(root.getChildren());
 			}
+			counter++;
+		}
+		if(ship.getLocation().getX()== treasure.getLocation().getX() && ship.getLocation().getY() == treasure.getLocation().getY()){
+			gameEvent.youWin(root.getChildren());
+		}
+		treasureImageView.setX(treasure.getLocation().getX() * scale);
+		treasureImageView.setY(treasure.getLocation().getY() * scale);
+		System.out.println();
+		//map.displayMap();
+	}
+	public void placeShips() {
+		ship = new PlayerShip();
+		int x = rand.nextInt(7);
+		while (x < 3){
+			x = rand.nextInt(13);
+		}
+		for(int i = 0; i < x; i++){
+			pirateShipList.add(new PirateShip());
+		}
 
+	}
+	//puts the treasure and the two decorator powerups on the map
+	public void placeTreasure() {
+		treasure = new TreasurePiece();
+		star = new StarPiece(ship);
+		pscp = new PirateStrategyChangerPiece(ship);
 
-			public void loadTreasureImage() {
-				treasureImage = new Image("treasure.png", scale, scale, false, false);
-				treasureImageView = new ImageView(treasureImage);
-				treasureImageView.setX(treasure.getLocation().getX() * scale);
-				treasureImageView.setY(treasure.getLocation().getY() * scale);
-			}
+	}
+	//allows the keypress actions to be registered
+	public void startSailing() {
+		scene.setOnKeyPressed(new EventHandler<KeyEvent> () {
 
-			public void loadStarImage(){
-				starImage = new Image("star.png", scale, scale, false, false);
-				starImageView = new ImageView(starImage);
-				starImageView.setX(star.getLocation().getX() * scale);
-				starImageView.setY(star.getLocation().getY() * scale);
-			}
-
-			public void loadPirateImages() {
-				pirateImage = new Image("pirateShip.png", scale, scale, false, false);
-				for(PirateShip pir: pirateShipList) {
-					pirateImageView = new ImageView(pirateImage);
-					pirateImageView.setX(pir.getLocation().getX() * scale);
-					pirateImageView.setY(pir.getLocation().getY() * scale);
-					pirateImageViewList.add(pirateImageView);
-				}
-			}
-			
-			public void loadChangeSearchStratImage() {
-				changeSearchStratImage = new Image("recycle.png", scale, scale, false, false);
-				changeSearchStratImageView = new ImageView(changeSearchStratImage);
-				changeSearchStratImageView.setX(pscp.getLocation().getX() * scale);
-				changeSearchStratImageView.setY(pscp.getLocation().getY() * scale);
-			}
-
-
-			public void updateImageLocation() {
-				shipImageView.setX(ship.getLocation().getX() * scale);
-				shipImageView.setY(ship.getLocation().getY() * scale);
-				if(ship.gameOver()) {
-					gameEvent.gameOver(root.getChildren());
-				}
-				if(ship.youWin()) {
-					gameEvent.youWin(root.getChildren());
-				}
-				int counter = 0;
-				for(ImageView pirIV: pirateImageViewList) {
-					pirIV.setX(pirateShipList.get(counter).getLocation().getX() * scale);
-					pirIV.setY(pirateShipList.get(counter).getLocation().getY() * scale);
-					if(pirateShipList.get(counter).gameOver()){
-						gameEvent.gameOver(root.getChildren());
-					}
-					counter++;
-				}
-				if(ship.getLocation().getX()== treasure.getLocation().getX() && ship.getLocation().getY() == treasure.getLocation().getY()){
-					gameEvent.youWin(root.getChildren());
-				}
-				treasureImageView.setX(treasure.getLocation().getX() * scale);
-				treasureImageView.setY(treasure.getLocation().getY() * scale);
-				System.out.println();
-				//map.displayMap();
-			}
-			public void placeShips() {
-				ship = new PlayerShip();
-				int x = rand.nextInt(7);
-				while (x < 3){
-					x = rand.nextInt(13);
-				}
-				for(int i = 0; i < x; i++){
-					pirateShipList.add(new PirateShip());
-				}
-
-			}
-
-			public void placeTreasure() {
-				treasure = new TreasurePiece();
-				star = new StarPiece(ship);
-				pscp = new PirateStrategyChangerPiece(ship);
-
-			}
-			public void startSailing() {
-				scene.setOnKeyPressed(new EventHandler<KeyEvent> () {
-
-					@Override
-					public void handle(KeyEvent event) {
-						switch(event.getCode()) {
-						case RIGHT:
-							ship.shipMovementStrat.goEast();
-							for(PirateShip pir: pirateShipList) {
-								pir.update(ship, mapArray);
-							}
-							break;
-						case LEFT:
-							ship.shipMovementStrat.goWest();
-							for(PirateShip pir: pirateShipList) {
-								pir.update(ship, mapArray);
-							}
-							break;
-						case DOWN:
-							ship.shipMovementStrat.goSouth();
-							for(PirateShip pir: pirateShipList) {
-								pir.update(ship, mapArray);
-							}
-							break;
-						case UP:
-							ship.shipMovementStrat.goNorth();
-							for(PirateShip pir: pirateShipList) {
-								pir.update(ship, mapArray);
-							}
-							break;
-						default:
-							break;
-						}
-						updateImageLocation();
-						System.out.println(ship.getLocation().toString());
-					}
-				});
-			}
-
-			@SuppressWarnings("deprecation")
 			@Override
-			public void stop(){
-				monstersThread.stop();
+			public void handle(KeyEvent event) {
+				switch(event.getCode()) {
+				case RIGHT:
+					ship.shipMovementStrat.goEast();
+					for(PirateShip pir: pirateShipList) {
+						pir.update(ship, mapArray);
+					}
+					break;
+				case LEFT:
+					ship.shipMovementStrat.goWest();
+					for(PirateShip pir: pirateShipList) {
+						pir.update(ship, mapArray);
+					}
+					break;
+				case DOWN:
+					ship.shipMovementStrat.goSouth();
+					for(PirateShip pir: pirateShipList) {
+						pir.update(ship, mapArray);
+					}
+					break;
+				case UP:
+					ship.shipMovementStrat.goNorth();
+					for(PirateShip pir: pirateShipList) {
+						pir.update(ship, mapArray);
+					}
+					break;
+				default:
+					break;
+				}
+				updateImageLocation();
+				System.out.println(ship.getLocation().toString());
 			}
+		});
+	}
 
-			public static void main(String[] args) {
-				launch(args);
-			}
-		}
+	@SuppressWarnings("deprecation")
+	@Override
+	public void stop(){
+		monstersThread.stop();
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+}

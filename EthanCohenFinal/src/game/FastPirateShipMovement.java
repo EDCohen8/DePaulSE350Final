@@ -8,7 +8,7 @@ public class FastPirateShipMovement implements PirateMovementInterface {
 	int x, y;
 	Grid map = Grid.getInstance();
 	GamePiece[][] gameMap = map.getMap();
-
+	//this is called whenever the ship's position is moved and moves the pirate closer towards the ship.
 	@Override
 	public void updateStrat(Observable o, Object arg, PirateShip pir) {
 		// TODO Auto-generated method stub

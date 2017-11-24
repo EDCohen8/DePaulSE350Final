@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+//NOTE
+//Github issues caused Sunny to have me upload his class into the project. This is what he worked on.
 class SunnyTestCase {
 
 	@Test

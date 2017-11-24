@@ -3,7 +3,7 @@ import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
-
+//OBSERVABLE DESIGN AND MOVES WITH STRATEGY DESIGN
 public class PirateShip implements GamePiece, Observer {
 	int x, y, randSearch;
 	Random rand = new Random();
@@ -53,7 +53,7 @@ public class PirateShip implements GamePiece, Observer {
 		return this;
 	}
 
-	//Changes movement strategy of the specific pirate
+	//Changes movement strategy of the specific pirate, can be done at runtime
 	public void changeFollowStrategy(){
 		randSearch = rand.nextInt(6);
 		if (randSearch == 0) {
@@ -69,6 +69,7 @@ public class PirateShip implements GamePiece, Observer {
 		return new Point(x,y);
 	}
 
+	//update movement based on when player ship moves.
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
@@ -76,7 +77,7 @@ public class PirateShip implements GamePiece, Observer {
 		x = movementStrat.getX();
 		y = movementStrat.getY();
 	}
-
+	//makes gameOver display
 	public void changeGameOverBoolean(){
 		gameOverBoolean = true;
 	}

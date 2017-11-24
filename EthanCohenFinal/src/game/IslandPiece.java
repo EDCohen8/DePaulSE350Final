@@ -4,7 +4,7 @@ import java.awt.Point;
 public class IslandPiece implements GamePiece {
 
 	int x, y;
-	
+	//constructor
 	public IslandPiece(int x, int y) {
 		this.x = x;
 		this.y = y;

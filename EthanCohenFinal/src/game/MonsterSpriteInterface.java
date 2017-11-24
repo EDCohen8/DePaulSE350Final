@@ -1,6 +1,7 @@
 package game;
 import javafx.scene.shape.Circle;
 
+//interface for the monster sprites
 public interface MonsterSpriteInterface {
 	public MonsterSpriteInterface getComponent();
 	public Circle getCircle();

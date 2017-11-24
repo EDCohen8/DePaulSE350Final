@@ -1,7 +1,7 @@
 package game;
 import java.awt.Point;
 import java.util.Random;
-
+//DECORATOR DESIGN
 public class PirateStrategyChangerPiece implements GamePiece, PowerUpInterface {
 
 
@@ -56,6 +56,7 @@ public class PirateStrategyChangerPiece implements GamePiece, PowerUpInterface {
 		return "?";
 	}
 
+	//changes pirate search strategy, should benefit ship which is why it is a decorator for it
 	@Override
 	public void power() {
 		for(int i = 0; i < map.length; i++) {

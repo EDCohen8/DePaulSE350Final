@@ -20,7 +20,7 @@ public class TreasurePiece implements GamePiece {
 		map[y][x] = this;
 	}
 	
-	
+	//moves treasure closer to the ship
 	@Override
 	public void move(int xPos, int yPos) {
 		

@@ -1,6 +1,7 @@
 package game;
 import java.util.Random;
 
+//SINGLETON CLASS
 public class Grid {
 
 	private static Grid uniqueInstance;
@@ -36,6 +37,7 @@ public class Grid {
 		placeIslands();
 	}
 	
+	//instantiates islands onto the grid.
 	public void placeIslands() {
 		int randIslandNum = rand.nextInt(500);
 		while(randIslandNum < 250){
@@ -65,7 +67,6 @@ public class Grid {
 		
 	}
 	
-
 	public void addMonster(int x, int y){
 
 		monsterValue++;

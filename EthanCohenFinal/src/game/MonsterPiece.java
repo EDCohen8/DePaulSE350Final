@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+//COMPOSITE DESIGN
 public class MonsterPiece implements Runnable {
 
 	Grid grid;
@@ -20,7 +21,7 @@ public class MonsterPiece implements Runnable {
 	int xMove, yMove;
 	Random random;
 	ObservableList<Node> gameEventScene;
-
+	//constructor
 	public MonsterPiece(int scalingFactorScale) {
 		random = new Random();
 		scalingFactor = scalingFactorScale;
@@ -31,11 +32,11 @@ public class MonsterPiece implements Runnable {
 		grid = Grid.getInstance();
 		map = grid.getMap();
 	}
-
+	//list of monster sprites
 	public ArrayList<MonsterSpriteInterface> getMonsterSprite() {
 		return monsterSprites;
 	}
-
+	//adds the monsters to the GUI (called in the GUI class)
 	public void addToPane(ObservableList<Node> sceneGraph) {
 		for(MonsterSpriteInterface monsterSprite: monsterSprites){
 			Circle circle = monsterSprite.getCircle();
@@ -43,7 +44,8 @@ public class MonsterPiece implements Runnable {
 			sceneGraph.add(circle);
 		}
 	}
-
+	//calls the multi-threading to run, allowing the monsters to move, merge into super monsters, and causes game overs if they
+	//come into contact with the ship.
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub

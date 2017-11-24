@@ -1,12 +1,13 @@
 package game;
 import java.util.Observable;
-
+//STRATEGY DESIGN
 public class PirateMovementLookForTreasure implements PirateMovementInterface {
 
 	int x, y;
 	Grid map = Grid.getInstance();
 	GamePiece[][] gameMap = map.getMap();
 	boolean left = true, down = true, moved;
+	//Pirate searches for treasure. Whenever the ship moves, he updates one moveable spot.
 	@Override
 	public void updateStrat(Observable o, Object arg, PirateShip pir) {
 		// TODO Auto-generated method stub

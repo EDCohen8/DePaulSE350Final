@@ -3,7 +3,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import game.*;
-
+//NOTE
+//Github issues caused Naoufal to have me upload his class into the project. This is what he worked on.
 class NaoufalOceanMapTest {
 	
 	@Test

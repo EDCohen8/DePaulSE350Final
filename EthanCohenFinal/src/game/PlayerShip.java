@@ -3,7 +3,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
-
+//DECORATOR DESIGN AND OBSERVABLE
 public class PlayerShip extends Observable implements GamePiece, PowerUpInterface {
 
 	int x, y;
@@ -73,7 +73,7 @@ public class PlayerShip extends Observable implements GamePiece, PowerUpInterfac
 		// TODO Auto-generated method stub
 		return "SHIP";
 	}
-
+	//does not have a power, but benefits from those that also implement the interface
 	@Override
 	public void power() {
 		// TODO Auto-generated method stub
@@ -82,7 +82,7 @@ public class PlayerShip extends Observable implements GamePiece, PowerUpInterfac
 	public void changeGameOverBoolean(){
 		gameOverBoolean = true;
 	}
-	
+	//makes gameover display
 	public boolean gameOver(){
 		return gameOverBoolean;
 	}
@@ -90,7 +90,7 @@ public class PlayerShip extends Observable implements GamePiece, PowerUpInterfac
 	public void changeYouWinBoolean() {
 		youWinBoolean = true;
 	}
-	
+	//makes you win display
 	public boolean youWin() {
 		return youWinBoolean;
 	}

@@ -15,7 +15,7 @@ public class NormalMonsterSprite implements MonsterSpriteInterface, GamePiece {
 	int scalingFactor = 14;
 	int radius = 10;
 	int size, classnum;
-	
+	//normal monster constructor
 	public NormalMonsterSprite(int scalingFactorScale) {
 		grid = Grid.getInstance();
 		map = grid.getMap();
@@ -127,6 +127,8 @@ public class NormalMonsterSprite implements MonsterSpriteInterface, GamePiece {
 		circle.setCenterY(y*scalingFactor + (scalingFactor/2));
 	}
 
+	//deletes the appearance of the circle in the GUI, this is called whenever the monster collides with another monster
+	//and forms a super monster and is removed from the array of monsters
 	public void destroy() {
 		map[y][x] = new OceanPiece(x, y);
 		circle.setFill(Color.TRANSPARENT);
